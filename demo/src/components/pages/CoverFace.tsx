@@ -10,7 +10,7 @@ export default function CoverFace({ onOpen }: { onOpen?: () => void }) {
       </svg>
       <h1 className="foil font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-none tracking-[0.18em]">{BRAND}</h1>
       <p className="font-display text-lg italic text-ink/80">{TAGLINE}</p>
-      <span className="mono mt-6 animate-pulse text-[0.65rem] tracking-[0.4em] text-ink/50">▼ {COVER_HINT}</span>
+      <span className="mono mt-6 motion-safe:animate-pulse text-[0.65rem] tracking-[0.4em] text-ink/50">▼ {COVER_HINT}</span>
     </button>
   )
 }

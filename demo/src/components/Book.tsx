@@ -34,6 +34,7 @@ export default function Book({ flat, started }: { flat: boolean; started: boolea
     if (flat) return
     const lenis = new Lenis({ lerp: 0.09 })
     lenisRef.current = lenis
+    ;(window as unknown as { __lenis?: Lenis }).__lenis = lenis
     lenis.stop()
     lenis.on('scroll', ScrollTrigger.update)
     const raf = (t: number) => lenis.raf(t * 1000)
@@ -59,7 +60,8 @@ export default function Book({ flat, started }: { flat: boolean; started: boolea
     if (!runway) return
     const max = runway.offsetHeight - window.innerHeight
     const y = runway.offsetTop + (tocTargetUnits(target) / totalUnits()) * max
-    if (lenisRef.current) lenisRef.current.scrollTo(y, jump ? { immediate: true } : { duration: 1.6 })
+    // force: a stopped Lenis (preloader) silently ignores scrollTo otherwise
+    if (lenisRef.current) lenisRef.current.scrollTo(y, jump ? { immediate: true, force: true } : { duration: 1.6 })
     else window.scrollTo({ top: y })
   }
 
@@ -98,9 +100,13 @@ export default function Book({ flat, started }: { flat: boolean; started: boolea
       // Cover opens; book re-centers on its spine; spine appears; chrome starts
       tl.to(book, { xPercent: 0, duration: 1 }, 0)
       tl.to(cover, { rotationY: coverOpenAngle(), duration: 1 }, 0)
+      // R1 (TOC) is revealed by the cover, not by a sheet flip — develop it here
+      tl.to(sheets[0].querySelector('.develop'), { opacity: 0, duration: 0.4, ease: 'power1.out' }, 0.4)
       tl.to('.spine', { opacity: 1, duration: 0.2 }, 0.9)
       tl.set(cover, { zIndex: COVER_Z_OPEN }, 1.05)
-      tl.to('.ribbon', { scaleY: 1, duration: totalUnits() - 1, ease: 'none' }, 1)
+      tl.to('.ribbon', { scaleY: 1, duration: totalUnits() - 1.4, ease: 'none' }, 1)
+      // the bookmark has nothing left to mark on the final spread — retire it
+      tl.to('.ribbon', { opacity: 0, duration: 0.35, ease: 'power1.in' }, totalUnits() - 0.4)
       tl.to('.page-edges', { scaleX: 0, duration: totalUnits() - 1.15, ease: 'none' }, 1.15)
 
       // Sheet flips with z choreography, shade, and develop on the incoming right page

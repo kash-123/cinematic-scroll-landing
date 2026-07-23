@@ -81,7 +81,7 @@ body { font-family: var(--font-display); overflow-x: hidden; }
   background: repeating-linear-gradient(to right, #1b202a 0 1px, #0e1116 1px 2px);
 }
 .ribbon {
-  position: absolute; top: -1.5%; right: 14%; width: 24px; height: 56%;
+  position: absolute; top: -1.5%; right: 8%; width: 24px; height: 56%;
   z-index: 40; pointer-events: none; transform: scaleY(0); transform-origin: top;
   background: linear-gradient(180deg, #8a6d35, #c9a45c 40%, #8a6d35);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 92%, 0 100%);
