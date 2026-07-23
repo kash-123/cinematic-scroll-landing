@@ -63,9 +63,11 @@ scrollbar and footer as navigation; every pinned scene adds scroll runway
 the user must budget (report total "lap length"; keep home ≤ ~25
 viewports); stacked blurred layers and unscoped `will-change` melt GPUs —
 prefer opacity overlays over animated `filter`; pinned scenes need
-keyboard/AT escape paths. Skipping imagery unity (core #2) or the
-atmosphere layer (core #3) is what makes sections feel unrelated — those
-two are not optional.
+keyboard/AT escape paths; **a preloader IS your LCP** (a 1.6s counter +
+wipes ≈ +2.3s to first content — choose that knowingly and keep observed
+LCP ≤ 2.5s). Skipping imagery unity (core #2) or the atmosphere layer
+(core #3) is what makes sections feel unrelated — those two are not
+optional.
 
 ## Workflow
 
@@ -75,6 +77,8 @@ two are not optional.
    imitate the mechanics, not the stack".
 2. **Design doc first** (palette ≤3 colors + accent, type pairing,
    hairlines), then implement. Pick set-pieces from the menu ON PURPOSE.
+   Decide imagery SHIP formats/sizes now (WebP q80-85 at ≤2× render size,
+   og as JPEG) — retrofitting at deploy time churns manifest + tests.
 3. **Budget scroll length**: each pinned scene costs viewports. Tell the
    user the total.
 4. **Verify visually** (NON-NEGOTIABLE): serve the build, screenshot at
@@ -123,7 +127,11 @@ two are not optional.
 - `references/book-mode.md` — full-page book sites: sheet model, z-index
   choreography, timeline math, flat fallback.
 - `references/imagery-universe.md` — locked style template, per-item
-  prompts, contact-sheet QA + watermark crop.
+  prompts, generation ops probes, contact-sheet QA + watermark crop,
+  ship-size discipline.
+- `references/verification-harness.md` — screenshot/console/Lighthouse
+  verification when browser tooling misbehaves: probe order, puppeteer-core
+  fallback harness, binary-deploy CLI-vs-MCP probe.
 - `scripts/audit_images.py` — image refs vs `public/` (missing + unused +
   shared-generic wiring smells).
 

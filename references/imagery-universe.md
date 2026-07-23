@@ -74,3 +74,19 @@ PNG (1024 + 64 favicon). Extract the brand palette from the emblem pixels
 The template is tool-agnostic: use whatever image-generation skill/tool
 the session provides (e.g. a Gemini/banana skill). The locked template,
 contact-sheet QA, and watermark crop apply identically regardless of tool.
+
+## Generation ops (probe first, then generate)
+
+- ONE structured probe before building any pipeline: is the MCP tool
+  present? else does the fallback script + a stored key exist? If no key,
+  ask the user immediately — do not go spelunking through configs.
+- Validate the key with a FREE metadata call (e.g. GET /models) before the
+  first paid generation.
+- Free tiers rate-limit hard (~5-15 RPM): pace batch calls (~7s apart) and
+  retry transient network drops once before reporting failure.
+- Parse the generator's ENTIRE stdout as JSON before declaring failure —
+  pretty-printed multi-line JSON defeats line-by-line parsers, and a "failed"
+  result that actually succeeded wastes a paid regeneration.
+- Decide SHIP formats and sizes at design time (see Ship-size discipline),
+  not at deploy time — retrofitting extensions churns manifest, tests, and
+  meta tags after verification already ran.
