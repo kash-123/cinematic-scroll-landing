@@ -104,12 +104,24 @@ right page rotates a **sheet** whose front face is R_k and back face is
 L_(k+1). 6 spreads → 12 folio pages → 5 sheets + cover board + base page:
 
 - **CoverBoard**: front = leather + gold foil; back = L1 (frontispiece
-  endpaper plate). Opens `rotateY 0 → ~-175°` with slight lift.
+  endpaper plate). Opens `rotateY 0 → ~-177°` with slight lift. While it
+  opens, the whole book block translates +half-a-page-width (closed book
+  centered → open spread centered on its spine); same tween, same ease.
 - **Sheet k (k=1..5)**: front = R_k, back = L_(k+1). Flips
-  `rotateY 0 → -168°` (skill's anti-z-fighting angle). Z-index above
-  sheet k+1.
+  `rotateY 0 → rest angle`. Z-index is choreographed, not static:
+  unflipped sheet k has `z = N − k` (right-stack order); at flip start it
+  bumps to `z = N + k`, so it passes above every already-flipped sheet
+  and every unflipped one while turning, and left-resting sheets stack
+  latest-on-top. (A static z-order cannot do this — sheet k+1 must cross
+  above sheet k mid-turn despite starting below it.)
+- **Rest angle −178°, staggered.** Because z-order is managed, the
+  original skill's `-168°` anti-z-fighting angle is unnecessary; sheets
+  rest at −178° (2° keystone — left-page text stays readable). Coplanar
+  flicker between resting sheets is prevented by a per-sheet stagger
+  (rest at `−178° + k·0.4°`, or ~0.5px translateZ "paper thickness").
+  Supersedes the skill's −168° advice when z is choreographed — phase 3
+  back-ports this.
 - **Base page**: R6 printed on the right-side base (inside back cover, CTA).
-- Flipped sheets rest at -168° on the left, latest on top.
 - Turning-sheet gradient shadow (opacity up then down); page beneath
   "develops" via a black overlay `opacity 0.45 → 0` (compositing-cheap
   alternative to `filter: brightness` — one animated property, no filter).
@@ -143,7 +155,8 @@ testable without a browser.
 Book grammar throughout: folios `PAGE 03 — 04 / 12`, running chapter heads,
 3px spine groove + 1px gold hairline, gold **ribbon bookmark** that
 lengthens with timeline progress (the progress rail, translated), preloader
-000→100 (1.6s, failsafe timeout so it can never wedge), fixed atmosphere
+000→100 (1.6s, failsafe timeout so it can never wedge; resolves instantly
+under `prefers-reduced-motion`), fixed atmosphere
 layer behind the book (radial candle-glow + drifting fog/noise + film
 grain), custom cursor labels only if time allows (stretch, not scope).
 
