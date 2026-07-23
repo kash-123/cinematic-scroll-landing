@@ -14,7 +14,7 @@ page.on('console', m => {
   if (m.type() === 'error' || m.type() === 'warning') problems.push(`${m.type()}: ${m.text()}`)
 })
 page.on('requestfailed', r => problems.push(`requestfailed: ${r.url()} ${r.failure()?.errorText}`))
-await page.goto(baseUrl, { waitUntil: 'networkidle0' })
+await page.goto(baseUrl, { waitUntil: 'load' })
 await new Promise(r => setTimeout(r, 3500))
 for (let f = 0; f <= 1; f += 0.05) {
   await page.evaluate(frac => {

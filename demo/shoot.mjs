@@ -26,7 +26,7 @@ async function newPage(width, height, reducedMotion) {
 
 // --- desktop depth sweep ---
 const page = await newPage(1440, 900, false)
-await page.goto(baseUrl, { waitUntil: 'networkidle0' })
+await page.goto(baseUrl, { waitUntil: 'load' })
 await new Promise(r => setTimeout(r, 3200)) // preloader + settle
 for (const u of DEPTHS) {
   const label = String(u).replace('.', '_')
@@ -46,7 +46,7 @@ await page.close()
 
 // --- hash deep link ---
 const deep = await newPage(1440, 900, false)
-await deep.goto(`${baseUrl}/#ch-2`, { waitUntil: 'networkidle0' })
+await deep.goto(`${baseUrl}/#ch-2`, { waitUntil: 'load' })
 await new Promise(r => setTimeout(r, 3800))
 await deep.screenshot({ path: join(outDir, 'desktop-deeplink-ch2.png') })
 console.log('shot deeplink')
@@ -54,7 +54,7 @@ await deep.close()
 
 // --- reduced motion (desktop width) ---
 const rm = await newPage(1440, 900, true)
-await rm.goto(baseUrl, { waitUntil: 'networkidle0' })
+await rm.goto(baseUrl, { waitUntil: 'load' })
 await new Promise(r => setTimeout(r, 1200))
 await rm.screenshot({ path: join(outDir, 'reduced-motion-top.png') })
 await rm.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
@@ -65,7 +65,7 @@ await rm.close()
 
 // --- mobile ---
 const mob = await newPage(390, 844, false)
-await mob.goto(baseUrl, { waitUntil: 'networkidle0' })
+await mob.goto(baseUrl, { waitUntil: 'load' })
 await new Promise(r => setTimeout(r, 1200))
 await mob.screenshot({ path: join(outDir, 'mobile-top.png') })
 await mob.evaluate(() => window.scrollTo(0, 3200))
