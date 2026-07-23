@@ -38,6 +38,13 @@ w, h = im.size
 im.crop((0, 0, w, int(h * 0.945))).save('out.png')
 ```
 
+## Ship-size discipline
+
+Generators emit print-size assets (2K PNG ≈ 2-3MB each). Before wiring,
+resize to ≤2× the largest rendered size and convert to WebP q80-85 (og
+image: JPEG for social scrapers). A 10-image batch went 29MB → 676KB with
+no visible loss. Keep the originals out of `public/`.
+
 ## Wiring discipline
 
 - Every content item gets its OWN images (course → 3 chapter images each).

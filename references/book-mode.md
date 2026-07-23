@@ -1,8 +1,8 @@
 # Full-Page Book Mode
 
 The whole page is one book; scrolling turns its pages. Distilled from the
-Codex Academy build (LMS trial page). DRAFT status until back-ported from
-a shipped build.
+Codex Academy build (LMS trial page) — shipped, verified, and corrected
+against the live deployment.
 
 ## The paper model
 
@@ -78,6 +78,23 @@ tl.to(nextDevelop, { opacity: 0, duration: 0.4 }, at + 0.3);                    
                                                                                 // NEXT right page — cheaper than
                                                                                 // filter: brightness, same read
 ```
+
+## Corrections that cost real debugging (from the shipped build)
+
+- **The first right page is revealed by the COVER, not by a flip.** If you
+  pre-set a "develop" overlay on every sheet front, nothing ever clears
+  R1's — clear it during the cover-open segment or the TOC sits dim forever.
+- **Retire the ribbon bookmark before the final spread** (fade it out during
+  the last emphasis) and keep it near the page margin (~8% from the edge):
+  fully grown it otherwise strikes through the CTA.
+- **A stopped Lenis silently ignores `scrollTo`.** Preloaders stop Lenis, so
+  hash-deep-link jumps at mount are no-ops without
+  `lenis.scrollTo(y, { immediate: true, force: true })`.
+- **Expose the smoother for verification**: `window.__lenis = lenis` lets a
+  puppeteer harness set exact scroll depths (`scrollTo(y, {immediate, force})`)
+  for deterministic screenshots at chosen timeline units.
+- Mid-flip, the turning sheet at ~90° shows a 1-2px smeared content sliver at
+  the spine. It reads as a turning page in motion — leave it.
 
 ## Book grammar
 

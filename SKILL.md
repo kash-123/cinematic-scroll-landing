@@ -106,6 +106,12 @@ two are not optional.
   reduced-motion and always carry a failsafe timeout.
 - **External credentials**: probe capabilities before use (list what the
   token can actually do before depending on it).
+- **A stopped Lenis silently ignores `scrollTo`**: preloaders stop Lenis,
+  so programmatic jumps (hash deep-links) need `{ force: true }`.
+- **Verification tooling**: puppeteer's `networkidle0` never fires on hosts
+  with keepalive connections (e.g. Vercel) — use `load` + a settle sleep.
+  Local antivirus page-injection (e.g. Kaspersky) skews simulated
+  Lighthouse scores; judge by observed FCP/LCP.
 - **Unreliable filesystems**: if your environment's FS is flaky, verify
   every git ref update immediately after making it.
 
