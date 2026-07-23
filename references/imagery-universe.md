@@ -61,3 +61,9 @@ Threshold non-white pixels → square crop around centroid → circular mask
 (4× supersampled ellipse, eroded ~1% to kill background rim) → transparent
 PNG (1024 + 64 favicon). Extract the brand palette from the emblem pixels
 (gold/navy/flame averages) and use those as design tokens.
+
+## Tooling note
+
+The template is tool-agnostic: use whatever image-generation skill/tool
+the session provides (e.g. a Gemini/banana skill). The locked template,
+contact-sheet QA, and watermark crop apply identically regardless of tool.

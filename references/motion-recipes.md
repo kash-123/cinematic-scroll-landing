@@ -102,3 +102,9 @@ gsap.ticker.add(() => {
 Counter 000→100 (1.6s), mono font, logo pulse; exit = two column wipes
 (`scaleY 1→0`, stagger 0.08, power4.inOut) revealing the hero's char-split
 headline animation (chars `yPercent 110→0`, stagger 0.02, expo.out).
+
+## 7. Full-page book mode
+
+The whole page as one book (cover open → sheet flips → CTA base page)
+outgrew this file: see `references/book-mode.md` for the sheet model,
+z-index choreography, timeline math, and the flat mobile fallback.
