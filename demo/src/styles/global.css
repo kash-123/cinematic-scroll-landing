@@ -143,3 +143,7 @@ body { font-family: var(--font-display); overflow-x: hidden; }
 .book-flat .page-pad { position: static; min-height: 60vh; }
 .book-flat .sheet-shade, .book-flat .develop, .book-flat .page-edges,
 .book-flat .ribbon, .book-flat .spine, .book-flat .cta-glint { display: none; }
+
+a:focus-visible, button:focus-visible {
+  outline: 1px solid var(--color-gold); outline-offset: 3px;
+}

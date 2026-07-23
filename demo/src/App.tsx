@@ -17,6 +17,9 @@ export default function App() {
   }, [])
   return (
     <div className={flat ? 'book-flat' : ''}>
+      <a href="#ch-4" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:bg-obsidian focus:px-4 focus:py-2 focus:text-gold mono text-xs">
+        Skip to trial offer
+      </a>
       <Atmosphere />
       {!ready && <Preloader onDone={onDone} />}
       <main>

@@ -140,6 +140,11 @@ export default function Book({ flat, started }: { flat: boolean; started: boolea
     [<RecordRight key="r5" />, <ColophonLeft key="l6" />],
   ]
 
+  // Which faces are interactable at the current spread (book mode):
+  // fronts belong to spread k (front of sheet k = R_k), backs to spread k+1.
+  const frontActive = (k: number) => !flat && (spread === k || spread === k + 1)
+  const backActive = (k: number) => !flat && (spread === k + 1 || spread === k + 2)
+
   return (
     <>
       {!flat && <BookHUD spread={spread} label={folioLabel(spread)} head={CHAPTER_HEADS[spread] ?? ''} />}
@@ -157,11 +162,11 @@ export default function Book({ flat, started }: { flat: boolean; started: boolea
               </div>
               {sheetFaces.map(([front, back], i) => (
                 <div key={i} className="leaf sheet" style={{ zIndex: zStacked(i + 1) }}>
-                  <div className="face front paper" style={folioStyle(faceFolio('sheetFront', i + 1))}>
+                  <div className="face front paper" inert={!flat && !frontActive(i + 1) ? true : undefined} style={folioStyle(faceFolio('sheetFront', i + 1))}>
                     {front}
                     <div className="develop" />
                   </div>
-                  <div className="face back paper" style={folioStyle(faceFolio('sheetBack', i + 1))}>{back}</div>
+                  <div className="face back paper" inert={!flat && !backActive(i + 1) ? true : undefined} style={folioStyle(faceFolio('sheetBack', i + 1))}>{back}</div>
                   <div className="sheet-shade" />
                 </div>
               ))}
