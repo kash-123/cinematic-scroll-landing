@@ -27,10 +27,10 @@ export const FEATURES_B: Feature[] = [
 
 export interface Course { id: string; title: string; lessons: number; image: string; alt: string }
 export const COURSES: Course[] = [
-  { id: 'astronomy', title: 'Astronomy & Navigation', lessons: 12, image: '/images/catalog-astrolabe.png', alt: 'Brass astrolabe rim-lit in gold against a dark background' },
-  { id: 'mathematics', title: 'Mathematics & Logic', lessons: 16, image: '/images/catalog-compass.png', alt: 'Gold drafting compass standing on dark parchment' },
-  { id: 'sciences', title: 'Natural Sciences', lessons: 14, image: '/images/catalog-botany.png', alt: 'Botanical specimen preserved under a glass dome, gold rim light' },
-  { id: 'humanities', title: 'Rhetoric & Humanities', lessons: 11, image: '/images/catalog-lyre.png', alt: 'Gold lyre emerging from darkness with volumetric fog' },
+  { id: 'astronomy', title: 'Astronomy & Navigation', lessons: 12, image: '/images/catalog-astrolabe.webp', alt: 'Brass astrolabe rim-lit in gold against a dark background' },
+  { id: 'mathematics', title: 'Mathematics & Logic', lessons: 16, image: '/images/catalog-compass.webp', alt: 'Gold drafting compass standing on dark parchment' },
+  { id: 'sciences', title: 'Natural Sciences', lessons: 14, image: '/images/catalog-botany.webp', alt: 'Botanical specimen preserved under a glass dome, gold rim light' },
+  { id: 'humanities', title: 'Rhetoric & Humanities', lessons: 11, image: '/images/catalog-lyre.webp', alt: 'Gold lyre emerging from darkness with volumetric fog' },
 ]
 
 export interface Stat { value: string; label: string }
@@ -57,16 +57,16 @@ export const TRIAL = {
 
 export interface Img { id: string; src: string; alt: string }
 export const IMAGES: Img[] = [
-  { id: 'frontispiece-emblem', src: '/images/frontispiece-emblem.png', alt: 'Gold emblem plate: an open tome encircled by a laurel wreath' },
-  { id: 'craft-inkwell', src: '/images/craft-inkwell.png', alt: 'Quill and brass inkwell, single gold rim light' },
-  { id: 'craft-seal', src: '/images/craft-seal.png', alt: 'Wax seal stamp resting on dark documents' },
-  { id: 'catalog-astrolabe', src: '/images/catalog-astrolabe.png', alt: 'Brass astrolabe rim-lit in gold against a dark background' },
-  { id: 'catalog-compass', src: '/images/catalog-compass.png', alt: 'Gold drafting compass standing on dark parchment' },
-  { id: 'catalog-botany', src: '/images/catalog-botany.png', alt: 'Botanical specimen preserved under a glass dome, gold rim light' },
-  { id: 'catalog-lyre', src: '/images/catalog-lyre.png', alt: 'Gold lyre emerging from darkness with volumetric fog' },
-  { id: 'record-armillary', src: '/images/record-armillary.png', alt: 'Armillary sphere in obsidian and gold, volumetric fog' },
-  { id: 'colophon-candle', src: '/images/colophon-candle.png', alt: 'Lit candle beside a stack of dark leather tomes' },
-  { id: 'cover-og', src: '/og/cover-og.png', alt: 'Closed obsidian book with gold foil lettering, three-quarter view' },
+  { id: 'frontispiece-emblem', src: '/images/frontispiece-emblem.webp', alt: 'Gold emblem plate: an open tome encircled by a laurel wreath' },
+  { id: 'craft-inkwell', src: '/images/craft-inkwell.webp', alt: 'Quill and brass inkwell, single gold rim light' },
+  { id: 'craft-seal', src: '/images/craft-seal.webp', alt: 'Wax seal stamp resting on dark documents' },
+  { id: 'catalog-astrolabe', src: '/images/catalog-astrolabe.webp', alt: 'Brass astrolabe rim-lit in gold against a dark background' },
+  { id: 'catalog-compass', src: '/images/catalog-compass.webp', alt: 'Gold drafting compass standing on dark parchment' },
+  { id: 'catalog-botany', src: '/images/catalog-botany.webp', alt: 'Botanical specimen preserved under a glass dome, gold rim light' },
+  { id: 'catalog-lyre', src: '/images/catalog-lyre.webp', alt: 'Gold lyre emerging from darkness with volumetric fog' },
+  { id: 'record-armillary', src: '/images/record-armillary.webp', alt: 'Armillary sphere in obsidian and gold, volumetric fog' },
+  { id: 'colophon-candle', src: '/images/colophon-candle.webp', alt: 'Lit candle beside a stack of dark leather tomes' },
+  { id: 'cover-og', src: '/og/cover-og.jpg', alt: 'Closed obsidian book with gold foil lettering, three-quarter view' },
 ]
 export const imageById = (id: string): Img => {
   const img = IMAGES.find(i => i.id === id)

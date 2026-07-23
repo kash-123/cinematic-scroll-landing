@@ -15,10 +15,10 @@ describe('content integrity', () => {
     expect(COURSES).toHaveLength(4)
     expect(STATS).toHaveLength(3)
   })
-  it('has 10 uniquely-named png images under /images or /og', () => {
+  it('has 10 uniquely-named web-optimized images under /images or /og', () => {
     expect(IMAGES).toHaveLength(10)
     expect(new Set(IMAGES.map(i => i.id)).size).toBe(10)
-    for (const img of IMAGES) expect(img.src).toMatch(/^\/(images|og)\/[a-z-]+\.png$/)
+    for (const img of IMAGES) expect(img.src).toMatch(/^\/(images|og)\/[a-z-]+\.(?:webp|jpg)$/)
   })
   it('every course card image exists in the manifest', () => {
     const srcs = new Set(IMAGES.map(i => i.src))
