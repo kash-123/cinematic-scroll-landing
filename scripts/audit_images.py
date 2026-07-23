@@ -14,7 +14,7 @@ import os, re, sys, collections
 root = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
 src, pub = os.path.join(root, 'src'), os.path.join(root, 'public')
 
-REF = re.compile(r"""['"`](/[A-Za-z0-9_.\-]+\.(?:png|jpe?g|svg|webp|mp4))['"`]""")
+REF = re.compile(r"""['"`](/[A-Za-z0-9_.\-]+(?:/[A-Za-z0-9_.\-]+)*\.(?:png|jpe?g|svg|webp|mp4))['"`]""")
 
 refs = collections.Counter()
 for dp, _, fns in os.walk(src):
@@ -27,7 +27,12 @@ if os.path.exists(idx):
     refs.update(REF.findall(open(idx, encoding='utf8', errors='ignore').read()))
 
 missing = [r for r in refs if not os.path.exists(os.path.join(pub, r.lstrip('/')))]
-public_files = {'/' + f for f in os.listdir(pub) if os.path.isfile(os.path.join(pub, f))} if os.path.isdir(pub) else set()
+public_files = set()
+if os.path.isdir(pub):
+    for dp, _, fns in os.walk(pub):
+        for f in fns:
+            rel = os.path.relpath(os.path.join(dp, f), pub).replace(os.sep, '/')
+            public_files.add('/' + rel)
 unused = sorted(public_files - set(refs))
 generic = [(r, c) for r, c in refs.most_common()
            if c >= 8 and not any(k in r for k in ('logo', 'noise', 'emblem', 'favicon'))]
