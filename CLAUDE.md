@@ -13,7 +13,7 @@ Editing repo files does nothing until re-copied:
 ```bash
 cp SKILL.md ~/.claude/skills/cinematic-scroll-landing/
 cp references/*.md ~/.claude/skills/cinematic-scroll-landing/references/
-cp scripts/audit_images.py ~/.claude/skills/cinematic-scroll-landing/scripts/
+cp scripts/*.py ~/.claude/skills/cinematic-scroll-landing/scripts/
 ```
 
 ## Demo commands

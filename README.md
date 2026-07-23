@@ -35,6 +35,27 @@ shipped as 676KB of WebP. Lighthouse: accessibility 100, CLS 0.
 
 ![Cover — The Codex Academy](docs/assets/readme-cover.webp)
 
+## Requirements
+
+Installing the skill needs nothing but the copy commands below — skills are
+passive documents, so there is no setup step and nothing to configure up
+front. Each requirement matters only when its workflow step arrives:
+
+- **Node 20+** — building the demo or any site made with the skill
+- **Python 3** (stdlib only) — `scripts/audit_images.py` and the setup
+  checker; Pillow optional (contact sheets, watermark crops)
+- **An image-generation tool + key** — only when generating imagery; any
+  image-gen MCP/skill works, and Google AI keys are free at
+  [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+- **Installed Chrome** — the visual-verification harness drives it via
+  puppeteer-core
+- **Deploy auth of your choice** (`npx vercel login`, `gh auth login`) —
+  only at deploy time
+
+On first use, run `python scripts/check_setup.py` for a gap report; the
+skill instructs the agent to walk you through closing any gaps, with your
+approval, at the moment each one is actually needed.
+
 ## Using the skill (Claude Code)
 
 Copy the skill files into your skills directory:
@@ -43,7 +64,7 @@ Copy the skill files into your skills directory:
 mkdir -p ~/.claude/skills/cinematic-scroll-landing/references ~/.claude/skills/cinematic-scroll-landing/scripts
 cp SKILL.md ~/.claude/skills/cinematic-scroll-landing/
 cp references/*.md ~/.claude/skills/cinematic-scroll-landing/references/
-cp scripts/audit_images.py ~/.claude/skills/cinematic-scroll-landing/scripts/
+cp scripts/*.py ~/.claude/skills/cinematic-scroll-landing/scripts/
 ```
 
 It triggers on requests like "book landing page", "flipbook site",

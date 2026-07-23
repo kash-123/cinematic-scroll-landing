@@ -88,6 +88,18 @@ optional.
 5. **Deep-link test**: hard-load nested routes and hash anchors.
 6. **Deploy, then verify the LIVE URL** the same way (see checklist).
 
+## First-run setup (new machine or new user)
+
+Install needs nothing beyond copying the files. On FIRST use, run
+`python scripts/check_setup.py` and show the user the gap report, then
+offer to close gaps — with their approval, never silently. The only
+credential is an image-gen key (free at https://aistudio.google.com/apikey;
+stored wherever the user's image tool expects, e.g. `~/.banana/api_key.txt`
+— or skip if the session has an image-gen MCP/skill). Deploy auth
+(`npx vercel login`, `gh auth login`) is the user's own interactive step —
+hand them the command. Missing pieces never block design/build work; each
+matters only when its workflow step arrives.
+
 ## Gotchas (each cost real time — check them all)
 
 - **Vite `base: './'` breaks deep links.** Relative asset URLs 404 the JS
@@ -134,6 +146,7 @@ optional.
   fallback harness, binary-deploy CLI-vs-MCP probe.
 - `scripts/audit_images.py` — image refs vs `public/` (missing + unused +
   shared-generic wiring smells).
+- `scripts/check_setup.py` — first-run environment gap report (stdlib only).
 
 ## Delivery checklist
 
